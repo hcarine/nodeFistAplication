@@ -7,7 +7,6 @@ var AuthorList = React.createClass({
 		authors: React.PropTypes.array.isRequired
 	},
 
-
 	render: function() {
 		var createAuthorRow = function(authors) {
 			return (
@@ -25,7 +24,7 @@ var AuthorList = React.createClass({
 						<th>Name</th>
 					</thead>
 					<tbody>
-						{this.props.state.Authors.map(createAuthorRow, this)}
+						{this.props.authors.map(createAuthorRow, this)}
 					</tbody>
 				</table>
 			</div>

@@ -7,11 +7,12 @@ var AuthorList = require('./authorList');
 var Author = React.createClass({
 	getInitialState: function(){
 		return {
-			Authors: []
+			authors: []
 		};
 	},
 	componentDidMount: function() {
-		if(this.isMoutend()){
+		if(this.isMounted()){
+			console.log("oiii");
 			this.setState({ authors: AuthorApi.getAllAuthors() });
 		}
 	},
@@ -19,7 +20,7 @@ var Author = React.createClass({
 		return (
 			<div>
 				<h1>Authors</h1>
-				<AuthorList />
+				<AuthorList authors={this.state.authors} />
 			</div>
 		);
 	}

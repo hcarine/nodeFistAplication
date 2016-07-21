@@ -13,10 +13,12 @@ var _clone = function(item) {
 
 var AuthorApi = {
 	getAllAuthors: function() {
+		console.log('autor ´e: ' + authors);
 		return _clone(authors); 
 	},
 
 	getAuthorById: function(id) {
+		console.log('autor ´e: ' + authors);
 		var author = _.find(authors, {id: id});
 		return _clone(author);
 	},
