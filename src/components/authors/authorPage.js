@@ -12,7 +12,6 @@ var Author = React.createClass({
 	},
 	componentDidMount: function() {
 		if(this.isMounted()){
-			console.log("oiii");
 			this.setState({ authors: AuthorApi.getAllAuthors() });
 		}
 	},

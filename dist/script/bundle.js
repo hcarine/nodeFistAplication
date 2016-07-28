@@ -44376,12 +44376,10 @@ var _clone = function(item) {
 
 var AuthorApi = {
 	getAllAuthors: function() {
-		console.log('autor ´e: ' + authors);
 		return _clone(authors); 
 	},
 
 	getAuthorById: function(id) {
-		console.log('autor ´e: ' + authors);
 		var author = _.find(authors, {id: id});
 		return _clone(author);
 	},
@@ -44436,6 +44434,20 @@ module.exports = {
 var React = require('react');
 
 var About = React.createClass({displayName: "About",
+	statics: {
+		willTransitionTo: function(transition, params, query, callback){
+			if(!confirm('voce realmente quer ver esta pagina?')){
+				transition.about();
+			} else{
+				callback();
+			}
+		},
+		willTransitionFrom: function(transition, component){
+			if(!confirm('voce realmente quer sair esta pagina?')){
+				transition.about();
+			}
+		}
+	},
 	render: function() {
 		return (
 			React.createElement("div", null, 
@@ -44535,7 +44547,6 @@ var Author = React.createClass({displayName: "Author",
 	},
 	componentDidMount: function() {
 		if(this.isMounted()){
-			console.log("oiii");
 			this.setState({ authors: AuthorApi.getAllAuthors() });
 		}
 	},
@@ -44640,6 +44651,7 @@ var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;
+var Redirect = Router.Redirect;
 /*
 var Home = require('./components/homePage');
 var Authors = require('./components/authors/authorPage');
@@ -44651,7 +44663,10 @@ var routes = (
 		React.createElement(DefaultRoute, {handler: require('./components/homePage')}), 
 		React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage')}), 
 		React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')}), 
-		React.createElement(NotFoundRoute, {handler: require('./components/notFoundPage')})
+		React.createElement(NotFoundRoute, {handler: require('./components/notFoundPage')}), 
+		React.createElement(Redirect, {from: "about-us", to: "about"}), 
+		React.createElement(Redirect, {from: "awthors", to: "authors"}), 
+		React.createElement(Redirect, {from: "about/*", to: "about"})
 	)
 );
 
